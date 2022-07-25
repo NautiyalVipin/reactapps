@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Hero from "./Pages/Hero";
+import Nav from "./Nav";
+import {Routes,Route,HashRouter} from "react-router-dom"
+import Todo from "./Pages/Todo";
+import Space from "./Pages/Space/Space";
+import {
+QueryClient,
+QueryClientProvider,
+} from '@tanstack/react-query'
+import Game from "./Pages/Game";
 
-function App() {
+
+
+function App() {  
+  
+
+  const client = new QueryClient()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <HashRouter>
+    <Routes>
+      <Route path="/" element={<Nav />}>
+        <Route path="hero" element={<Hero />} />
+         <Route path="todo" element={<Todo />} />
+         <Route path="" element={<QueryClientProvider client={client}><Space /></QueryClientProvider>} />
+        <Route path="gameapi" element={<Game />} />
+      </Route>
+    </Routes>
+  </HashRouter>
+  
+    
+  
+  
+    )
 }
 
 export default App;
